@@ -183,7 +183,7 @@ docker run -it
 
             <!--  cat app.js run when you inside the container -->
             cat app.js copied file
-          </command></container_name
+          </command> </container_name
         ></image_name
       ></containerName
     ></containerName
@@ -285,11 +285,124 @@ docker build -t dockernodejs .
 
 ```
 
+#  Caching Layers
+
+Basically it watch whether you have updated the file and if file has been updated then recreate the updated file.
+
+```Dockerfile
+
+# Base Image created
+FROM ubuntu 
+
+
+
+ RUN apt update
+
+RUN apt-get install -y curl
+
+
+ RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+
+
+RUN apt-get upgrade -y
+RUN apt-get install -y nodejs
+
+
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+COPY app.js app.js
+COPY  .env .env
+
+RUN npm install
+
+ENTRYPOINT [ "node","app.js" ]
+
+# run this command 
+docker build -t <image_name or id>
+docker buildx build -t  268b78ee3b3a .
+
+
+```
+
+let suppose , app.js file has updated then it will change only the app.js or update app.js 
+
+what happen when all `copy` command puts over the `RUN` command ,
+it alway install packages or configurations while update any file.
+
+so , better approch is `RUN` command after `COPY` because it will install one time and change only the copied file.
+
+
+# PUBLISH TO HUB
+
+create account docker.hub.com
+
+or cmd `docker login`
+create repository : 
+after that you will get 
+this:
+```Dockerfile 
+docker push rahulkumar9142/dockernodejs:tagname
+```
+```dockerfile
+# create local file 
+docker build -t rahulkumar9142/dockernodejs
+
+```
+
+
+
+# DOCKER COMPOSE 
+it will run all serivces , like mongoose , redis, postgres etc... simul...
+
+create `docker-compose.yml`
+
+and inside it
+
+```html
+
+<!-- version -->
+version:'3.8.9
+
+<!-- postgress will come from docker.hub -->
+
+services: 
+ postgres:
+ image:postgres 
+ port:
+ -'3333:33333'
+ enviromen:
+ POSTRES_USER:postgres
+ POSTGRES_DB:review
+ POSTGRES_PASSWORD:password
+
+ redis:
+ image:redis
+ port:
+ -"6379:6379"
+
+
+<!-- cmd 
+ -->
 
 
 
 
+```
+```html
+<!-- cmd  to run services-->
+docker compose up
 
+<!-- it will remove services -->
+docker compose down 
+
+<!-- -d diatched mode  means work on background-->
+docker compose -d
+
+```
+if got permision denied 
+```
+sudo docker compose up
+```
 
 
 

@@ -1,11 +1,10 @@
 # Base Image created
 FROM ubuntu 
 
-#To get this version, you can use the apt package manager. Refresh your local package index first:
+
 
  RUN apt update
 
-# Inatall node js over ubuntu os curl is a tool
 RUN apt-get install -y curl
 
 
@@ -28,6 +27,6 @@ RUN npm install
 
 ENTRYPOINT [ "node","app.js" ]
 
-# After setting all the essiential configurations create image of it 
+
 
 
