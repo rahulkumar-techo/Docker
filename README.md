@@ -238,3 +238,58 @@ export default {
  docker compose -f docker-compose.dev.yml ps
 ```
 
+
+---
+
+
+
+# communication with container 
+`to get container details`
+
+```js
+docker inspect <container name>
+```
+
+
+
+
+
+
+
+
+
+
+#NGINX
+```Dockerfile
+# Stage 1: Build the React application
+FROM node:14 as build
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
+# Stage 2: Run the production build
+FROM nginx:alpine
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+
+```
+
+```cmd
+
+docker build -t your-react-app .
+docker run -p 8080:80 your-react-app
+```
+
+
+
+
+
