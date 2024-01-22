@@ -203,9 +203,11 @@ export default defineConfig({
 - watch: { usePolling: true },: Configures file watching options. usePolling: true enables file watching using polling, which can be useful in certain environments where regular file system events may not be supported.
 
 `You could Face this problem  while tailwind configuration...`
+
+
 ```js
 The error is occurring because your postcss.config.js file is being treated as an ECMAScript module (ES module) due to the "type": "module" setting in your package.json. However, the contents of the postcss.config.js file are written in CommonJS syntax, which is causing the require statement to fail.
-``
+```
 
 
 ```js
