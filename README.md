@@ -203,4 +203,16 @@ export default defineConfig({
 - watch: { usePolling: true },: Configures file watching options. usePolling: true enables file watching using polling, which can be useful in certain environments where regular file system events may not be supported.
 
 
+```CMD
+ docker compose -f docker-compose.dev.yml -d
+```
+```CMD
+ docker compose -f docker-compose.dev.yml start
+```
+```CMD
+ docker compose -f docker-compose.dev.yml stop
+```
+```CMD
+ docker compose -f docker-compose.dev.yml ps
+```
 
