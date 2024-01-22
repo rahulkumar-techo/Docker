@@ -90,7 +90,7 @@ export default defineConfig({
 ```
 more way to solve vite network 
 
-1. ```js
+ ```js
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
