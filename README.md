@@ -289,7 +289,67 @@ docker build -t your-react-app .
 docker run -p 8080:80 your-react-app
 ```
 
+---
 
+```Dockerfile
+
+version: "3"
+
+services:
+  react-vite:
+    build:
+      context: "./client"  # Address of your folder like client
+      dockerfile: Dockerfile  # It could be dockerfile.dev or dockerfile.production
+    ports:
+      - "3000:3000"
+    container_name: react-container
+    environment:
+      - WATCHPACKPOLLING=true
+    networks:
+      - react-vite-network
+    volumes:
+      - ./client:/app
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: "./express_nam"
+      dockerfile: Dockerfile
+    ports:
+      - '5000:5000'
+    container_name: express-container
+    networks:
+      - mern-stack-network
+    depends_on:
+      - mongo
+      - client
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    container_name: mongo-container
+    networks:
+      - mern-stack-network
+    volumes:
+      - mongoData:/data/db
+    env_file:
+      - mongoData:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITTB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_DATABASE=ecom
+
+networks:
+  mern-stack-network:
+
+volumes:
+  mongoData:
+
+
+
+```
 
 
 
