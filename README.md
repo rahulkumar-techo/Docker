@@ -351,5 +351,59 @@ volumes:
 
 ```
 
+# placed it before client and server file
+```Dockerfile
+version: "3"
+services:
+  frontend:
+    build:
+      context: "./client"
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    container_name: frontend_container
+    environment:
+      - WATCHPACKPOLLING=true
+    networks:
+      - todo-network
+    volumes:
+      - ./client:/express-app
+    depends_on:
+      - backend
+
+  backend:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - '5000:5000'
+    container_name: express-server
+    image: express-express-image
+    volumes:
+      - ./server:/express-app
+      - /express-app/node_modules 
+    networks:
+      - todo-network
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
+    container_name: mongo_container
+    networks:
+      - todo-network
+    volumes:
+      - mongoData:/data/db
+
+networks:
+  todo-network:
+
+volumes:  
+  mongoData:
+
+```
+
 
 
