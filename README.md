@@ -448,3 +448,23 @@ esc to back in normal mode
 :qa to quit all (short for :quitall)
 :q to quit (short for :quit)
 ```
+
+
+```nginx.conf
+
+events{}
+
+http{
+       server{
+             listen 80;
+             server_name _;
+             location / {
+             return 200 " NGINX.CONF IS WORKED .";
+                  }
+             
+          }
+}
+
+
+
+```
