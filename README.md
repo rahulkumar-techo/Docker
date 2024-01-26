@@ -497,7 +497,7 @@ server{
 
 listen 80;
 server_name _;
-root /your file/path
+root /etc/nginx/mysite
 }
 }
 ```
@@ -525,7 +525,7 @@ etc .... all posible file
 server{
 listen 80;
 server_name _;
-root /your file/path
+root /etc/nginx/mysite
 }
 }
 
@@ -542,7 +542,8 @@ include path/mime.type/
 server{
 listen 80;
 server_name _;
-root /your file/path
+# directory path not file
+root /etc/nginx/mysite
 }
 }
 
