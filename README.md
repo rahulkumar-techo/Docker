@@ -405,5 +405,46 @@ volumes:
 
 ```
 
+---
 
+---
 
+# NGINX
+`enter in ubuntu machine `
+```nginx
+docker run -it -p 8080:80 ubuntu
+```
+`update to i it`
+```nginx
+apt-get update
+```
+`install nginx`
+```nginx
+apt-get install nginx
+
+nginx -v
+```
+`if nginx not show its page`
+```nginx
+docker run -d -p 8080:80 nginx
+
+```
+
+`To view code directly to the terminal`
+```vim
+apt-get install vim
+```
+
+`get back from vim it'll back from docker`
+`ctrl + z`
+
+`for quit vim `
+```vim
+esc to back in normal mode
+
+:q! to quit vim
+:wq! to write and quit, attempting to force the write if the file lacks write permission
+:x to write and quit; like :wq but writes only if modified (short for :exit)
+:qa to quit all (short for :quitall)
+:q to quit (short for :quit)
+```
