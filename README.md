@@ -410,6 +410,8 @@ volumes:
 ---
 
 # NGINX
+
+
 `enter in ubuntu machine `
 ```nginx
 docker run -it -p 8080:80 ubuntu
@@ -430,6 +432,10 @@ docker run -d -p 8080:80 nginx
 
 ```
 
+`check status`
+```
+nginx -t
+```
 `To view code directly to the terminal`
 ```vim
 apt-get install vim
@@ -437,6 +443,13 @@ apt-get install vim
 
 `get back from vim it'll back from docker`
 `ctrl + z`
+
+
+`start nginx `
+```
+nginx
+```
+
 
 `for quit vim `
 ```vim
@@ -468,3 +481,72 @@ http{
 
 
 ```
+
+## NGINX SERVING StaSTIC CONTENT 
+
+` if we need to load static file html, css , png etc... , now need to implement thats all  `
+
+content type text/html 
+
+it autometicall set the html type in content type but if not other extension file include
+
+```vim
+events{}
+http{
+server{
+
+listen 80;
+server_name _;
+root /your file/path
+}
+}
+```
+
+##### create a file style.css index.html and integrate both 
+
+```vim
+
+events{}
+http{
+
+type{
+    text/html                                        html htm shtml;
+    text/css                                         css;
+    application/java-archive                         jar war ear;
+    application/json                                 json;
+    video/3gpp                                       3gpp 3gp;
+    video/mp2t                                       ts;
+    video/mp4                                        mp4;
+
+etc .... all posible file 
+
+}
+
+server{
+listen 80;
+server_name _;
+root /your file/path
+}
+}
+
+```
+
+
+`BUT nginx server already has possible .extension file   `
+
+```nginx-conf
+events{}
+http{
+
+include path/mime.type/
+server{
+listen 80;
+server_name _;
+root /your file/path
+}
+}
+
+```
+
+
+
